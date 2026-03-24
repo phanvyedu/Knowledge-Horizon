@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Horizon — English Language Centre</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1A1410;
+    --brown: #2C1F14;
+    --copper: #B5683A;
+    --copper-light: #D4845A;
+    --warm-gray: #8A7968;
+    --border: rgba(181,104,58,0.2);
+    --text: #2C2318;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ─────────────────────────────────── */
+  .hero {
+    position: relative;
+    background-color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 80px 40px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 110%, rgba(181,104,58,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(181,104,58,0.08) 0%, transparent 60%);
+  }
+
+  /* Decorative arcs */
+  .hero-arc {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(181,104,58,0.12);
+    animation: breathe 8s ease-in-out infinite;
+  }
+  .arc1 { width: 700px; height: 700px; bottom: -300px; right: -200px; }
+  .arc2 { width: 500px; height: 500px; top: -150px; left: -100px; animation-delay: -3s; }
+  .arc3 { width: 280px; height: 280px; top: 60px; right: 120px; border-color: rgba(181,104,58,0.06); animation-delay: -5s; }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.03); opacity: 0.6; }
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--copper);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--copper);
+    opacity: 0.5;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(64px, 10vw, 120px);
+    font-weight: 300;
+    color: #F5F0E8;
+    text-align: center;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.5s;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--copper-light);
+  }
+
+  .hero-subtitle {
+    margin-top: 32px;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--warm-gray);
+    text-transform: uppercase;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.9s;
+  }
+  .hero-subtitle span { opacity: 0.4; }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1.4s;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--copper), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  .scroll-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--warm-gray);
+    text-transform: uppercase;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── NAV ──────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(26,20,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(181,104,58,0.12);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #F5F0E8;
+    letter-spacing: 0.05em;
+  }
+  .nav-logo span { color: var(--copper); }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--copper-light); }
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--copper);
+    color: var(--copper);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--copper); color: var(--dark); }
+
+  /* ── CONTENT LAYOUT ───────────────────────── */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ── SECTION COMMON ───────────────────────── */
+  section { padding: 100px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 24px;
+  }
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    margin-bottom: 32px;
+  }
+  .section-heading em { font-style: italic; color: var(--copper); }
+  .body-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #5C4D3C;
+    max-width: 680px;
+  }
+
+  /* ── OVERVIEW ─────────────────────────────── */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .overview-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--dark);
+    border-left: 2px solid var(--copper);
+    padding-left: 28px;
+    margin-top: 48px;
+  }
+
+  /* ── PHILOSOPHY ───────────────────────────── */
+  .philosophy-bg {
+    background-color: var(--dark);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .philosophy-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 100% 100%, rgba(181,104,58,0.12) 0%, transparent 70%);
+  }
+  .philosophy-bg .section-heading { color: var(--cream); }
+  .philosophy-bg .body-text { color: rgba(245,240,232,0.65); }
+  .philosophy-bg .section-label { color: var(--copper-light); }
+
+  .philosophy-statement {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--cream);
+    margin: 48px 0 24px;
+    max-width: 800px;
+  }
+  .philosophy-statement strong {
+    font-weight: 600;
+    color: var(--copper-light);
+    font-style: italic;
+  }
+
+  /* ── WHO WE SERVE ─────────────────────────── */
+  .serve-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+    background: var(--border);
+  }
+  .serve-card {
+    background: var(--cream);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+  }
+  .serve-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--copper);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    transform-origin: left;
+  }
+  .serve-card:hover::after { transform: scaleX(1); }
+  .serve-card:hover { background: #F0E8DA; }
+  .serve-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: rgba(181,104,58,0.12);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .serve-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+  .serve-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--warm-gray);
+  }
+
+  /* ── OFFERINGS ────────────────────────────── */
+  .offerings-list {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+  }
+  .offering-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: default;
+    transition: padding-left 0.3s;
+    position: relative;
+  }
+  .offering-item:first-child { border-top: 1px solid var(--border); }
+  .offering-item::before {
+    content: '';
+    position: absolute;
+    left: -48px;
+    width: 3px;
+    height: 0;
+    background: var(--copper);
+    transition: height 0.3s;
+    top: 50%; transform: translateY(-50%);
+  }
+  .offering-item:hover { padding-left: 16px; }
+  .offering-item:hover::before { height: 60%; }
+
+  .offering-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--dark);
+  }
+  .offering-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--copper);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+  }
+
+  /* ── DIFFERENTIATOR ───────────────────────── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .diff-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 48px;
+    background: var(--dark);
+    position: sticky;
+    top: 120px;
+  }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .stat-number span { color: var(--copper); }
+  .stat-label {
+    font-size: 12px;
+    color: var(--warm-gray);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .stat-divider { width: 40px; height: 1px; background: rgba(181,104,58,0.3); }
+
+  /* ── STATUS BADGE ─────────────────────────── */
+  .status-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 32px 40px;
+    background: #EDE6D8;
+    border-left: 3px solid var(--copper);
+    margin-top: 32px;
+  }
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #3D9B3D;
+    box-shadow: 0 0 0 3px rgba(61,155,61,0.2);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(61,155,61,0.2); }
+    50% { box-shadow: 0 0 0 6px rgba(61,155,61,0.1); }
+  }
+  .status-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dark);
+  }
+  .status-text strong { color: #3D6B3D; }
+
+  /* ── FOOTER ───────────────────────────────── */
+  footer {
+    background: var(--dark);
+    padding: 64px 0;
+    border-top: 1px solid rgba(181,104,58,0.15);
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--cream);
+  }
+  .footer-logo span { color: var(--copper); }
+  .footer-tagline {
+    font-size: 12px;
+    color: var(--warm-gray);
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(138,121,104,0.6);
+    text-align: right;
+  }
+
+  /* ── UTILITY ──────────────────────────────── */
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-32 { margin-top: 32px; }
+  .mt-48 { margin-top: 48px; }
+  .mt-64 { margin-top: 64px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .content { padding: 0 24px; }
+    .overview-grid, .serve-grid, .diff-grid { grid-template-columns: 1fr; gap: 40px; }
+    .serve-grid { gap: 1px; }
+    .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+    .footer-meta { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Knowledge <span>Horizon</span></div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#offerings">Courses</a></li>
+    <li><a href="#difference">Our Edge</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Enrol Now</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-arc arc1"></div>
+  <div class="hero-arc arc2"></div>
+  <div class="hero-arc arc3"></div>
+
+  <p class="hero-eyebrow">English Language Centre · Founded by Phan Lê Ngọc Vy</p>
+  <h1 class="hero-title">Knowledge<br><em>Horizon</em></h1>
+  <div class="hero-subtitle">
+    <span>Students</span> ·
+    <span>University Learners</span> ·
+    <span>Working Professionals</span>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="content">
+    <div class="overview-grid">
+      <div>
+        <p class="section-label">01 — Overview</p>
+        <h2 class="section-heading">More than<br>an English<br><em>centre</em></h2>
+        <div class="status-section">
+          <div class="status-dot"></div>
+          <span class="status-text">Currently <strong>Active</strong> · Language Center</span>
+        </div>
+      </div>
+      <div>
+        <p class="body-text" style="margin-top: 56px;">
+          Knowledge Horizon is an English language centre founded by Phan Lê Ngọc Vy, dedicated to helping students, university learners, and working professionals develop genuine communicative competence in English.
+        </p>
+        <p class="body-text mt-32">
+          Not just the ability to pass exams — but the confidence and capacity to use the language meaningfully in real contexts.
+        </p>
+        <div class="overview-quote">
+          "We do not teach English.<br>We teach people — who happen<br>to be learning English."
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy" class="philosophy-bg">
+  <div class="content" style="position: relative;">
+    <p class="section-label">02 — Philosophy</p>
+    <p class="philosophy-statement">
+      Language learning should be<br>
+      <strong>rigorous, relevant, and human.</strong>
+    </p>
+    <p class="body-text">
+      Every course, every class, and every interaction at Knowledge Horizon reflects the same learner-centred philosophy that has guided fifteen years of teaching practice. This is not a centre that follows templates — it is a space where teaching is treated as a professional discipline, and learning is taken seriously.
+    </p>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section id="serve">
+  <div class="content">
+    <p class="section-label">03 — Who We Serve</p>
+    <h2 class="section-heading">Built for every<br><em>kind of learner</em></h2>
+
+    <div class="serve-grid">
+      <div class="serve-card">
+        <div class="serve-number">01</div>
+        <h3 class="serve-title">School Students</h3>
+        <p class="serve-desc">Building foundational skills and exam readiness for the next stage of learning.</p>
+      </div>
+      <div class="serve-card">
+        <div class="serve-number">02</div>
+        <h3 class="serve-title">University Students</h3>
+        <p class="serve-desc">Developing academic English for rigorous study, research, and global communication.</p>
+      </div>
+      <div class="serve-card">
+        <div class="serve-number">03</div>
+        <h3 class="serve-title">Working Professionals</h3>
+        <p class="serve-desc">Communicating with confidence in professional and international contexts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERINGS -->
+<section id="offerings">
+  <div class="content">
+    <p class="section-label">04 — What We Offer</p>
+    <h2 class="section-heading">Our<br><em>courses</em></h2>
+
+    <div class="offerings-list">
+      <div class="offering-item">
+        <span class="offering-name">General English</span>
+        <span class="offering-tag">All Levels</span>
+      </div>
+      <div class="offering-item">
+        <span class="offering-name">IELTS Preparation</span>
+        <span class="offering-tag">Academic & General</span>
+      </div>
+      <div class="offering-item">
+        <span class="offering-name">Academic English Writing</span>
+        <span class="offering-tag">University</span>
+      </div>
+      <div class="offering-item">
+        <span class="offering-name">Business English Communication</span>
+        <span class="offering-tag">Professional</span>
+      </div>
+      <div class="offering-item">
+        <span class="offering-name">One-on-One Coaching & Tutoring</span>
+        <span class="offering-tag">Personalised</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATOR -->
+<section id="difference">
+  <div class="content">
+    <div class="diff-grid">
+      <div class="diff-stats">
+        <div>
+          <div class="stat-number">15<span>+</span></div>
+          <div class="stat-label">Years of teaching practice</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div>
+          <div class="stat-number">3</div>
+          <div class="stat-label">Distinct learner pathways</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div>
+          <div class="stat-number">5</div>
+          <div class="stat-label">Specialised course tracks</div>
+        </div>
+      </div>
+      <div>
+        <p class="section-label">05 — What Makes Us Different</p>
+        <h2 class="section-heading">Research-led.<br><em>Human-centred.</em></h2>
+        <p class="body-text mt-32">
+          Every course at Knowledge Horizon is informed by current research in second language acquisition, cognitive psychology, and reflective teaching practice.
+        </p>
+        <p class="body-text mt-16">
+          This is not a centre that follows templates. It is a space where teaching is treated as a professional discipline, and where genuine learning — not just test scores — is the measure of success.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Knowledge <span>Horizon</span></div>
+      <div class="footer-tagline">English Language Centre · Founded by Phan Lê Ngọc Vy</div>
+    </div>
+    <div class="footer-meta">
+      <div>Status: Active</div>
+      <div style="margin-top: 6px;">Type: Language Center</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
